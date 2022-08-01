@@ -24,14 +24,64 @@
 
 function main(inputNum) {
 
-	console.log('input:', inputNum)
+	// console.log('input:', inputNum)
 	if (!Number.isInteger(inputNum)) {
 		return inputNum;
 	}
 
 	const numString = inputNum.toString();
 
+	const numArr = [];
 
-	return a + b;
+	const findSymmetricalNumber = (i, j = 1) => {
+		if (numString[i - j] === numString[i + j]) {
+			findSymmetricalNumber(i, ++j)
+		}
+
+		if (j > 1) {
+			let str = ''
+			while (j) {
+				str += numString[i - j];
+				--j
+			}
+			const symmetricalNumber = `${str}${numString[i]}${str.reverse()}`
+			numArr.push(symmetricalNumber);
+		}
+	}
+
+	for (let i = 0; i < numString.length;) {
+		numArr.push(numString[i]);
+		findSymmetricalNumber(i)
+		i++;
+	}
+
+	numArr.sort((a, b) => {
+		if (a.length === b.length) {
+			if (a.length === 1) {
+				return b - a
+			}
+
+			return parseInt(b) - parseInt(a)
+		}
+		let minLength = Math.min(b.length, a.length)
+		for (let i = 0; i < minLength;) {
+			if (a[i] > b[i]) {
+				return -1
+			}
+
+			if (a[i] < b[i]) {
+				return -1
+			}
+			i++;
+		}
+		return 0
+
+	})
+
+	const result = parseInt(numArr.join(''));
+	return result;
+
 }
+
+
 module.exports = main;
