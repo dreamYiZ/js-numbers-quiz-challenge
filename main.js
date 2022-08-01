@@ -22,4 +22,16 @@
 
 // 解释：a 分割后满足条件的数组为 [1, 2, 3, 121, 131]，数组中的元素拼接后的最大值为321311211
 
+function main(inputNum) {
 
+	console.log('input:', inputNum)
+	if (!Number.isInteger(inputNum)) {
+		return inputNum;
+	}
+
+	const numString = inputNum.toString();
+
+
+	return a + b;
+}
+module.exports = main;
