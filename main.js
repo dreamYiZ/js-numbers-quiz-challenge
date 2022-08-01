@@ -33,26 +33,75 @@ function main(inputNum) {
 
 	const numArr = [];
 
-	const findSymmetricalNumber = (i, j = 1) => {
+	const MODE_FIND_SYMMETRICAL = {
+		LEFT_AND_RIGHT: 'LEFT_AND_RIGHT',
+		RIGHT: 'RIGHT'
+	};
+	const findSymmetricalNumber = (i, j = 1, mode) => {
 		if (numString[i - j] === numString[i + j]) {
-			findSymmetricalNumber(i, ++j)
+			return findSymmetricalNumber(i, ++j, MODE_FIND_SYMMETRICAL.LEFT_AND_RIGHT)
 		}
 
+
+		if (numString[i] === numString[i + j]) {
+			return findSymmetricalNumber(i, ++j, MODE_FIND_SYMMETRICAL.RIGHT)
+		}
+
+
 		if (j > 1) {
+			const cachedSkipCount = j;
+			j--;
 			let str = ''
 			while (j) {
-				str += numString[i - j];
-				--j
+				if (mode === MODE_FIND_SYMMETRICAL.RIGHT) {
+					str += numString[i];
+				} else {
+					str += numString[i - j];
+				}
+				--j;
 			}
-			const symmetricalNumber = `${str}${numString[i]}${str.reverse()}`
-			numArr.push(symmetricalNumber);
+
+			console.log('str', str);
+
+			if (mode === MODE_FIND_SYMMETRICAL.LEFT_AND_RIGHT) {
+				const symmetricalNumber = `${str}${numString[i]}${str.split('').reverse().join('')}`
+				return [true, 0, cachedSkipCount, symmetricalNumber]
+			}
+
+			if (mode === MODE_FIND_SYMMETRICAL.RIGHT) {
+				const symmetricalNumber = `${str}${numString[i]}`
+				return [true, 0, cachedSkipCount, symmetricalNumber]
+			}
+
 		}
+
+		return [false]
 	}
 
 	for (let i = 0; i < numString.length;) {
-		numArr.push(numString[i]);
-		findSymmetricalNumber(i)
-		i++;
+		if (numArr.indexOf(numString[i]) < 0) {
+			numArr.push(numString[i]);
+		}
+
+
+		let [isFound, popCount, skipCount, foundShouldPush] = findSymmetricalNumber(i)
+		console.log('isFound', isFound, popCount, skipCount, foundShouldPush);
+		if (isFound) {
+			while (popCount) {
+				numArr.pop();
+				popCount--;
+			}
+			numArr.push(foundShouldPush);
+			if (numArr.indexOf(foundShouldPush) < 0) {
+				numArr.push(foundShouldPush);
+			}
+			i += skipCount
+		} else {
+			// if (numArr.indexOf(numString[i] < 0)) {
+			// 	numArr.push(numString[i]);
+			// }
+			i++;
+		}
 	}
 
 	numArr.sort((a, b) => {
@@ -70,7 +119,16 @@ function main(inputNum) {
 			}
 
 			if (a[i] < b[i]) {
-				return -1
+				return 1
+			}
+			if (i === minLength - 1) {
+				if (a.length > minLength) {
+					return b[i] - a[i + 1]
+				}
+
+				if (b.length > minLength) {
+					return b[i + 1] - a[i]
+				}
 			}
 			i++;
 		}
@@ -78,6 +136,7 @@ function main(inputNum) {
 
 	})
 
+	// console.log('numArr', numArr)
 	const result = parseInt(numArr.join(''));
 	return result;
 
