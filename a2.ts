@@ -3,7 +3,7 @@
 
 // add dynamic programming
 
-const main = (inputNum: number): number => {
+const main = (inputNum: number): string => {
 	const str = inputNum.toString()
 	const n = str.length
 	const dp: boolean[][] = []
@@ -33,7 +33,7 @@ const main = (inputNum: number): number => {
 
 	const nums = Array.from(palindromes).sort((a, b) => parseInt(`${b}${a}`) - parseInt(`${a}${b}`) )
 
-	return +nums.join('')
+	return nums.join('')
 }
 
 // console.log(main(13211) === 32111)
