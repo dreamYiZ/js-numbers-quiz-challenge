@@ -24,14 +24,12 @@
 
 function main(inputNum) {
 
-	// console.log('input:', inputNum)
 	if (!Number.isInteger(inputNum)) {
 		return inputNum;
 	}
 
 	const numString = inputNum.toString();
 
-	// const numArr = [];
 
 	const numSet = new Set();
 
@@ -39,25 +37,18 @@ function main(inputNum) {
 		LEFT_AND_RIGHT: 'LEFT_AND_RIGHT',
 		RIGHT: 'RIGHT'
 	};
+
 	const findSymmetricalNumber = (i, j = 1, mode) => {
-		// console.log(i, j, mode);
-		// if(i===numString.length-1){
-		// 	return [false];
-		// }
 		if (numString[i - j] === numString[i + j]) {
 
-			// console.log(i,j,mode);
-
 			if ((i + j) < (numString.length)) {
-				return findSymmetricalNumber(i, ++j, MODE_FIND_SYMMETRICAL.LEFT_AND_RIGHT)
+				return findSymmetricalNumber(i, ++j, MODE_FIND_SYMMETRICAL.LEFT_AND_RIGHT);
 			}
-
-			// ++j;
 		}
 
 
 		if (numString[i] === numString[i + j]) {
-			return findSymmetricalNumber(i, ++j, MODE_FIND_SYMMETRICAL.RIGHT)
+			return findSymmetricalNumber(i, ++j, MODE_FIND_SYMMETRICAL.RIGHT);
 		}
 
 
@@ -74,51 +65,36 @@ function main(inputNum) {
 				--j;
 			}
 
-			// console.log('str', str);
-
 			if (mode === MODE_FIND_SYMMETRICAL.LEFT_AND_RIGHT) {
-				const symmetricalNumber = `${str}${numString[i]}${str.split('').reverse().join('')}`
-				return [true, cachedSkipCount, symmetricalNumber]
+				const symmetricalNumber = `${str}${numString[i]}${str.split('').reverse().join('')}`;
+				return [true, cachedSkipCount, symmetricalNumber];
 			}
 
 			if (mode === MODE_FIND_SYMMETRICAL.RIGHT) {
-				const symmetricalNumber = `${str}${numString[i]}`
-				return [true, cachedSkipCount, symmetricalNumber]
+				const symmetricalNumber = `${str}${numString[i]}`;
+				return [true, cachedSkipCount, symmetricalNumber];
 			}
 
 		}
 
-		return [false]
+		return [false];
 	}
 
 	for (let i = 0; i < numString.length;) {
-		// if (numArr.indexOf(numString[i]) < 0) {
-		// 	numArr.push(numString[i]);
-		// }
 
-		numSet.add(numString[i])
+		numSet.add(numString[i]);
 
 
-		let [isFound, skipCount, foundShouldPush] = findSymmetricalNumber(i)
-		// let [isFound, popCount, skipCount, foundShouldPush] = findSymmetricalNumber(i)
-		// console.log('isFound', isFound, popCount, skipCount, foundShouldPush);
+		let [isFound, skipCount, foundNUmber] = findSymmetricalNumber(i);
+
 		if (isFound) {
-			// while (popCount) {
-			// 	numArr.pop();
-			// 	popCount--;
-			// }
-			// numArr.push(foundShouldPush);
-			// if (numArr.indexOf(foundShouldPush) < 0) {
-			// 	numArr.push(foundShouldPush);
-			// }
 
-			numSet.add(foundShouldPush)
+			numSet.add(foundNUmber);
 
-			i += skipCount
+			i += skipCount;
+
 		} else {
-			// if (numArr.indexOf(numString[i] < 0)) {
-			// 	numArr.push(numString[i]);
-			// }
+
 			i++;
 		}
 	}
@@ -130,38 +106,34 @@ function main(inputNum) {
 
 		if (a.length === b.length) {
 			if (a.length === 1) {
-				return b - a
+				return b - a;
 			}
 
-			return b - a
+			return b - a;
 		}
 		let minLength = Math.min(b.length, a.length)
 		for (let i = 0; i < minLength;) {
 			if (a[i] > b[i]) {
-				return -1
+				return -1;
 			}
 
 			if (a[i] < b[i]) {
-				return 1
+				return 1;
 			}
 			if (i === minLength - 1) {
 				if (a.length > minLength) {
-					return b[i] - a[i + 1]
+					return b[i] - a[i + 1];
 				}
 
 				if (b.length > minLength) {
-					return b[i + 1] - a[i]
+					return b[i + 1] - a[i];
 				}
 			}
 			i++;
 		}
-		return 0
+		return 0;
 
 	})
-
-	// console.log('numArr', numArr)
-	// const result = parseInt(numArr.join(''));
-	// return result;
 
 	// return string avoid overflow int range
 	return numArr.join('');
