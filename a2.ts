@@ -15,7 +15,7 @@ const main = (inputNum: number): number => {
 		}
 	}
 
-	const palindromes = new Set < string > ()
+	const palindromes = new Set<string>()
 
 	for (let i = n - 1; i >= 0; --i) {
 		for (let j = i + 1; j < n; ++j) {
@@ -31,9 +31,9 @@ const main = (inputNum: number): number => {
 		palindromes.add(str[i])
 	}
 
-	const nums = Array.from(palindromes).sort()
+	const nums = Array.from(palindromes).sort((a, b) => parseInt(`${b}${a}`) - parseInt(`${a}${b}`) )
 
-	return +nums.reverse().join('')
+	return +nums.join('')
 }
 
 // console.log(main(13211) === 32111)

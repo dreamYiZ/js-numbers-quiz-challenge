@@ -31,7 +31,9 @@ function main(inputNum) {
 
 	const numString = inputNum.toString();
 
-	const numArr = [];
+	// const numArr = [];
+
+	const numSet = new Set();
 
 	const MODE_FIND_SYMMETRICAL = {
 		LEFT_AND_RIGHT: 'LEFT_AND_RIGHT',
@@ -90,9 +92,11 @@ function main(inputNum) {
 	}
 
 	for (let i = 0; i < numString.length;) {
-		if (numArr.indexOf(numString[i]) < 0) {
-			numArr.push(numString[i]);
-		}
+		// if (numArr.indexOf(numString[i]) < 0) {
+		// 	numArr.push(numString[i]);
+		// }
+
+		numSet.add(numString[i])
 
 
 		let [isFound, skipCount, foundShouldPush] = findSymmetricalNumber(i)
@@ -103,10 +107,13 @@ function main(inputNum) {
 			// 	numArr.pop();
 			// 	popCount--;
 			// }
-			numArr.push(foundShouldPush);
-			if (numArr.indexOf(foundShouldPush) < 0) {
-				numArr.push(foundShouldPush);
-			}
+			// numArr.push(foundShouldPush);
+			// if (numArr.indexOf(foundShouldPush) < 0) {
+			// 	numArr.push(foundShouldPush);
+			// }
+
+			numSet.add(foundShouldPush)
+
 			i += skipCount
 		} else {
 			// if (numArr.indexOf(numString[i] < 0)) {
@@ -116,6 +123,7 @@ function main(inputNum) {
 		}
 	}
 
+	const numArr = Array.from(numSet);
 	numArr.sort((a, b) => {
 		// don't use this because avoid overflow
 		// return `${b}${a}` - `${a}${b}`

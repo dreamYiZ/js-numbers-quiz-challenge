@@ -22,8 +22,8 @@ var main = function (inputNum) {
     for (var i = 0; i < n; ++i) {
         palindromes.add(str[i]);
     }
-    var nums = Array.from(palindromes).sort();
-    return +nums.reverse().join('');
+    var nums = Array.from(palindromes).sort(function (a, b) { return parseInt("".concat(b).concat(a)) - parseInt("".concat(a).concat(b)); });
+    return +nums.join('');
 };
 // console.log(main(13211) === 32111)
 // console.log(main(12131) === 321311211)
