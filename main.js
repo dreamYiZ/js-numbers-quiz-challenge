@@ -53,7 +53,6 @@ function main(inputNum) {
 
 
 		if (j > 1) {
-			const cachedSkipCount = j;
 			j--;
 			let str = ''
 			while (j) {
@@ -67,12 +66,12 @@ function main(inputNum) {
 
 			if (mode === MODE_FIND_SYMMETRICAL.LEFT_AND_RIGHT) {
 				const symmetricalNumber = `${str}${numString[i]}${str.split('').reverse().join('')}`;
-				return [true, cachedSkipCount, symmetricalNumber];
+				return [true, symmetricalNumber];
 			}
 
 			if (mode === MODE_FIND_SYMMETRICAL.RIGHT) {
 				const symmetricalNumber = `${str}${numString[i]}`;
-				return [true, cachedSkipCount, symmetricalNumber];
+				return [true, symmetricalNumber];
 			}
 
 		}
@@ -85,18 +84,21 @@ function main(inputNum) {
 		numSet.add(numString[i]);
 
 
-		let [isFound, skipCount, foundNUmber] = findSymmetricalNumber(i);
+		let [isFound, foundNumber] = findSymmetricalNumber(i);
 
 		if (isFound) {
 
-			numSet.add(foundNUmber);
+			numSet.add(foundNumber);
 
-			i += skipCount;
+			// i += skipCount;
 
-		} else {
+			// } else {
 
-			i++;
+			// i++;
 		}
+
+		i++;
+
 	}
 
 	const numArr = Array.from(numSet);
