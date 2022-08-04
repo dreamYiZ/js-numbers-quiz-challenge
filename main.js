@@ -38,8 +38,19 @@ function main(inputNum) {
 		RIGHT: 'RIGHT'
 	};
 	const findSymmetricalNumber = (i, j = 1, mode) => {
+		// console.log(i, j, mode);
+		// if(i===numString.length-1){
+		// 	return [false];
+		// }
 		if (numString[i - j] === numString[i + j]) {
-			return findSymmetricalNumber(i, ++j, MODE_FIND_SYMMETRICAL.LEFT_AND_RIGHT)
+
+			// console.log(i,j,mode);
+
+			if ((i + j) < (numString.length )) {
+				return findSymmetricalNumber(i, ++j, MODE_FIND_SYMMETRICAL.LEFT_AND_RIGHT)
+			}
+
+			// ++j;
 		}
 
 
@@ -61,7 +72,7 @@ function main(inputNum) {
 				--j;
 			}
 
-			console.log('str', str);
+			// console.log('str', str);
 
 			if (mode === MODE_FIND_SYMMETRICAL.LEFT_AND_RIGHT) {
 				const symmetricalNumber = `${str}${numString[i]}${str.split('').reverse().join('')}`
@@ -85,7 +96,7 @@ function main(inputNum) {
 
 
 		let [isFound, popCount, skipCount, foundShouldPush] = findSymmetricalNumber(i)
-		console.log('isFound', isFound, popCount, skipCount, foundShouldPush);
+		// console.log('isFound', isFound, popCount, skipCount, foundShouldPush);
 		if (isFound) {
 			while (popCount) {
 				numArr.pop();

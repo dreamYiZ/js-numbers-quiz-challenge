@@ -10,6 +10,10 @@ test(' test main function', () => {
 
 
   expect(main(12131)).toBe(321311211);
+  expect(main(121)).toBe(21211);
+  expect(main(1216361)).toBe(632163611211);
+
+  // expect(main(1323118)).toBe(321311211);
 
 
 });
