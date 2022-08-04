@@ -1,3 +1,5 @@
+//  write by ZhiHu network friends.
+// add dynamic programming
 var main = function (inputNum) {
     var str = inputNum.toString();
     var n = str.length;
