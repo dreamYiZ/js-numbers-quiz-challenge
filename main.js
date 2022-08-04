@@ -46,7 +46,7 @@ function main(inputNum) {
 
 			// console.log(i,j,mode);
 
-			if ((i + j) < (numString.length )) {
+			if ((i + j) < (numString.length)) {
 				return findSymmetricalNumber(i, ++j, MODE_FIND_SYMMETRICAL.LEFT_AND_RIGHT)
 			}
 
@@ -116,12 +116,15 @@ function main(inputNum) {
 	}
 
 	numArr.sort((a, b) => {
+		// don't use this because avoid overflow
+		// return `${b}${a}` - `${a}${b}`
+
 		if (a.length === b.length) {
 			if (a.length === 1) {
 				return b - a
 			}
 
-			return parseInt(b) - parseInt(a)
+			return b - a
 		}
 		let minLength = Math.min(b.length, a.length)
 		for (let i = 0; i < minLength;) {
@@ -148,8 +151,12 @@ function main(inputNum) {
 	})
 
 	// console.log('numArr', numArr)
-	const result = parseInt(numArr.join(''));
-	return result;
+	// const result = parseInt(numArr.join(''));
+	// return result;
+
+	// return string avoid overflow int range
+	return numArr.join('');
+
 
 }
 
