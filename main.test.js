@@ -27,4 +27,7 @@ test(' test main function', () => {
   // expect(main(1323118)).toBe(321311211);
 
 
+	expect(main(1221)).toBe('212211')
+
+
 });

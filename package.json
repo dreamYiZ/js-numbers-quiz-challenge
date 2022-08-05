@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "npx tsc a2.ts ;jest"
+    "test": "jest",
+    "test:tsc": "npx tsc a2.ts ;jest"
   },
   "keywords": [],
   "author": "",
