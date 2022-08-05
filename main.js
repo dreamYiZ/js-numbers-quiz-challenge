@@ -35,6 +35,7 @@ function main(inputNum) {
 
 	const MODE_FIND_SYMMETRICAL = {
 		LEFT_AND_RIGHT: 'LEFT_AND_RIGHT',
+		EVEN_LEFT_AND_RIGHT: 'EVEN_LEFT_AND_RIGHT',
 		RIGHT: 'RIGHT'
 	};
 
@@ -51,6 +52,12 @@ function main(inputNum) {
 			return findSymmetricalNumber(i, ++j, MODE_FIND_SYMMETRICAL.RIGHT);
 		}
 
+		// if (numString[i - j + 1] === numString[i + j]) {
+		// 	if ((i + j) < (numString.length-1)) {
+		// 		return findSymmetricalNumber(i, ++j, MODE_FIND_SYMMETRICAL.EVEN_LEFT_AND_RIGHT);
+		// 	}
+		// }
+
 
 		if (j > 1) {
 			const skipCount = j;
@@ -59,14 +66,27 @@ function main(inputNum) {
 			while (j) {
 				if (mode === MODE_FIND_SYMMETRICAL.RIGHT) {
 					str += numString[i];
+				} else if (mode === MODE_FIND_SYMMETRICAL.LEFT_AND_RIGHT) {
+					str += numString[i - j];
+					// } else if (
+					// 	mode === MODE_FIND_SYMMETRICAL.EVEN_LEFT_AND_RIGHT
+					// ) {
+					// str += numString[i - j];
+
 				} else {
 					str += numString[i - j];
 				}
+
 				--j;
 			}
 
 			if (mode === MODE_FIND_SYMMETRICAL.LEFT_AND_RIGHT) {
 				const symmetricalNumber = `${str}${numString[i]}${str.split('').reverse().join('')}`;
+				return [true, 1, symmetricalNumber];
+			}
+
+			if (mode === MODE_FIND_SYMMETRICAL.EVEN_LEFT_AND_RIGHT) {
+				const symmetricalNumber = `${str}${str.split('').reverse().join('')}`;
 				return [true, 1, symmetricalNumber];
 			}
 
