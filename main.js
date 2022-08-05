@@ -94,7 +94,6 @@ function main(inputNum) {
 
 			if (mode === MODE_FIND_SYMMETRICAL.EVEN_LEFT_AND_RIGHT) {
 				const symmetricalNumber = `${str}${str.split('').reverse().join('')}`;
-				// return [true, 1, '999'];
 
 				return [true, 1, symmetricalNumber];
 			}
@@ -126,8 +125,6 @@ function main(inputNum) {
 
 			i++;
 		}
-
-		// i++;
 
 	}
 
