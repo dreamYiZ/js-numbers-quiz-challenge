@@ -43,7 +43,7 @@ function main(inputNum) {
 		if (numString[i - j] === numString[i + j]) {
 
 			if ((i + j) < (numString.length)) {
-				if (mode !== MODE_FIND_SYMMETRICAL.EVEN_LEFT_AND_RIGHT) {
+				if (!mode || mode === MODE_FIND_SYMMETRICAL.LEFT_AND_RIGHT) {
 					return findSymmetricalNumber(i, ++j, MODE_FIND_SYMMETRICAL.LEFT_AND_RIGHT);
 				}
 			}
@@ -51,7 +51,7 @@ function main(inputNum) {
 
 
 		if (numString[i] === numString[i + j]) {
-			if (mode !== MODE_FIND_SYMMETRICAL.EVEN_LEFT_AND_RIGHT) {
+			if (!mode || mode === MODE_FIND_SYMMETRICAL.RIGHT) {
 				return findSymmetricalNumber(i, ++j, MODE_FIND_SYMMETRICAL.RIGHT);
 			}
 		}
@@ -59,7 +59,7 @@ function main(inputNum) {
 
 		if (numString[i - j + 1] === numString[i + j]) {
 			if ((i + j) < (numString.length)) {
-				if (mode !== MODE_FIND_SYMMETRICAL.LEFT_AND_RIGHT) {
+				if (!mode || [MODE_FIND_SYMMETRICAL.EVEN_LEFT_AND_RIGHT, MODE_FIND_SYMMETRICAL.RIGHT].includes(mode)) {
 					return findSymmetricalNumber(i, ++j, MODE_FIND_SYMMETRICAL.EVEN_LEFT_AND_RIGHT);
 				}
 			}
